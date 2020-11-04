@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from "./ContactData/ContactData";
-import { Route } from "react-router-dom";
 
 class Checkout extends Component {
   state = {
@@ -21,7 +21,7 @@ class Checkout extends Component {
         ingredients[param[0]] = +param[1];
       }
     }
-    this.setState({ ingredients: ingredients, totalPrice: price });
+    this.setState({ ingredients: ingredients, price: price });
     console.log("Checkout -> componentDidMount -> ingredients", ingredients);
   }
 
