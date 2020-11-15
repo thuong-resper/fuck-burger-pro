@@ -1,8 +1,8 @@
+import { Button } from "@material-ui/core";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import React from "react";
 import BuildControl from "./BuildControl/BuildControl";
 import classes from "./BuildControls.module.css";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { Button } from "@material-ui/core";
 
 const controls = [
   { label: "Salad", type: "salad" },
