@@ -1,8 +1,6 @@
 import axios from "../../axios-orders";
 import * as actionTypes from "./actionTypes";
 
-// purchase an burger
-
 export const purchaseBurgerSuccess = (id, orderData) => {
   return {
     type: actionTypes.PURCHASE_BURGER_SUCCESS,
@@ -18,22 +16,20 @@ export const purchaseBurgerFail = (error) => {
   };
 };
 
-// async
-
 export const purchaseBurgerStart = () => {
   return {
     type: actionTypes.PURCHASE_BURGER_START,
   };
 };
 
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (orderData, token) => {
   return (dispatch) => {
     dispatch(purchaseBurgerStart());
     axios
-      .post("/orders.json", orderData)
+      .post("/orders.json?auth=" + token, orderData)
       .then((response) => {
-        console.log("purchaseBurger -> response", response.data);
-        dispatch(purchaseBurgerSuccess(response.data, orderData));
+        console.log(response.data);
+        dispatch(purchaseBurgerSuccess(response.data.name, orderData));
       })
       .catch((error) => {
         dispatch(purchaseBurgerFail(error));
@@ -46,10 +42,6 @@ export const purchaseInit = () => {
     type: actionTypes.PURCHASE_INIT,
   };
 };
-
-// end purchase an burger
-
-// fetch orders
 
 export const fetchOrdersSuccess = (orders) => {
   return {
@@ -71,13 +63,13 @@ export const fetchOrdersStart = () => {
   };
 };
 
-// async
-
-export const fetchOrders = (order) => {
+export const fetchOrders = (token, userId) => {
   return (dispatch) => {
     dispatch(fetchOrdersStart());
+    const queryParams =
+      "?auth=" + token + '&orderBy="userId"&equalTo="' + userId + '"';
     axios
-      .get("/orders.json")
+      .get("/orders.json" + queryParams)
       .then((res) => {
         const fetchedOrders = [];
         for (let key in res.data) {
@@ -88,10 +80,8 @@ export const fetchOrders = (order) => {
         }
         dispatch(fetchOrdersSuccess(fetchedOrders));
       })
-      .catch((error) => {
-        dispatch(fetchOrdersFail(error));
+      .catch((err) => {
+        dispatch(fetchOrdersFail(err));
       });
   };
 };
-
-// end fetch orders

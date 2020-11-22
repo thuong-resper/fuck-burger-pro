@@ -33,7 +33,7 @@ const buildControls = (props) => (
       size="large"
       onClick={props.ordered}
     >
-      ODER NOW
+      {props.isAuth ? "ODER NOW" : "SIGN UP TO ORDER"}
     </Button>
   </div>
 );
