@@ -16,38 +16,41 @@ const INGREDIENT_PRICES = {
 };
 
 const addIngredient = (state, action) => {
+  const { ingredientName } = action.payload;
   const updatedIngredient = {
-    [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
+    [ingredientName]: state.ingredients[ingredientName] + 1,
   };
   const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
   const updatedState = {
     ingredients: updatedIngredients,
-    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+    totalPrice: state.totalPrice + INGREDIENT_PRICES[ingredientName],
     building: true,
   };
   return updateObject(state, updatedState);
 };
 
 const removeIngredient = (state, action) => {
+  const { ingredientName } = action.payload;
   const updatedIng = {
-    [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
+    [ingredientName]: state.ingredients[ingredientName] - 1,
   };
   const updatedIngs = updateObject(state.ingredients, updatedIng);
   const updatedSt = {
     ingredients: updatedIngs,
-    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+    totalPrice: state.totalPrice - INGREDIENT_PRICES[ingredientName],
     building: true,
   };
   return updateObject(state, updatedSt);
 };
 
 const setIngredients = (state, action) => {
+  const { ingredients } = action.payload;
   return updateObject(state, {
     ingredients: {
-      salad: action.ingredients.salad,
-      bacon: action.ingredients.bacon,
-      cheese: action.ingredients.cheese,
-      meat: action.ingredients.meat,
+      salad: ingredients.salad,
+      bacon: ingredients.bacon,
+      cheese: ingredients.cheese,
+      meat: ingredients.meat,
     },
     totalPrice: 4,
     error: false,

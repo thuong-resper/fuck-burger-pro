@@ -1,24 +1,27 @@
-import axios from "../../axios-orders";
 import * as actionTypes from "./actionTypes";
 
-export const addIngredient = (name) => {
+export const addIngredient = (ingredientName) => {
   return {
     type: actionTypes.ADD_INGREDIENT,
-    ingredientName: name,
+    payload: {
+      ingredientName,
+    },
   };
 };
 
-export const removeIngredient = (name) => {
+export const removeIngredient = (ingredientName) => {
   return {
     type: actionTypes.REMOVE_INGREDIENT,
-    ingredientName: name,
+    payload: {
+      ingredientName,
+    },
   };
 };
 
 export const setIngredients = (ingredients) => {
   return {
     type: actionTypes.SET_INGREDIENTS,
-    ingredients: ingredients,
+    payload: { ingredients },
   };
 };
 
@@ -29,14 +32,7 @@ export const fetchIngredientsFailed = () => {
 };
 
 export const initIngredients = () => {
-  return (dispatch) => {
-    axios
-      .get("https://burger-builder-by-react-js.firebaseio.com/ingredients.json")
-      .then((response) => {
-        dispatch(setIngredients(response.data));
-      })
-      .catch((error) => {
-        dispatch(fetchIngredientsFailed());
-      });
+  return {
+    type: actionTypes.INIT_INGREDIENTS,
   };
 };
