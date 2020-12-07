@@ -48,7 +48,8 @@ I list out the technologies and knowledge I used in this pet project.
   + Firebase: Authenticate, Realtime Database, Storage, Hosting (for deployment).
   + React, router, react-redux, redux-saga, redux-form
   + Hooks.
-New technologies that I want to intergrate into:
+  
+New technologies that I want to intergrate into
   + Auth0
   + NextJS
   + Testing
