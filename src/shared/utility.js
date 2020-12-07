@@ -36,3 +36,5 @@ export const checkValidity = (value, rules) => {
 
   return isValid;
 };
+
+// eslint-disable-line react-hooks/exhaustive-deps

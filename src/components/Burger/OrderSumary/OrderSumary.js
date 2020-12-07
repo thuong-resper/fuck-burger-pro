@@ -1,40 +1,36 @@
 import { Grid } from "@material-ui/core";
-import React, { Component } from "react";
+import React from "react";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import Button from "../../UI/Button/Button";
 
-class OrderSummary extends Component {
-  render() {
-    let ingredientsSummary = Object.keys(this.props.ingredients).map(
-      (igKey) => {
-        return (
-          <li key={igKey}>
-            <span style={{ textTransform: "capitalize" }}>{igKey} : </span>
-            {this.props.ingredients[igKey]}
-          </li>
-        );
-      }
-    );
+const OrderSummary = (props) => {
+  let ingredientsSummary = Object.keys(props.ingredients).map((igKey) => {
     return (
-      <Aux>
-        <h3>Your Order</h3>
-        <p>A delicious burger with the following ingredients: </p>
-        <ul>{ingredientsSummary}</ul>
-        <p>
-          <strong>Total Price: {this.props.price.toFixed(2)}</strong>
-        </p>
-        <p>Continue to Checkout?</p>
-        <Grid container direction="row" justify="flex-end" alignItems="center">
-          <Button btnType="Danger" clicked={this.props.purchaseCancelled}>
-            CANCEL
-          </Button>
-          <Button btnType="Success" clicked={this.props.purchaseContinued}>
-            CONTINUE
-          </Button>
-        </Grid>
-      </Aux>
+      <li key={igKey}>
+        <span style={{ textTransform: "capitalize" }}>{igKey} : </span>
+        {props.ingredients[igKey]}
+      </li>
     );
-  }
-}
+  });
+  return (
+    <Aux>
+      <h3>Your Order</h3>
+      <p>A delicious burger with the following ingredients: </p>
+      <ul>{ingredientsSummary}</ul>
+      <p>
+        <strong>Total Price: {props.price.toFixed(2)}</strong>
+      </p>
+      <p>Continue to Checkout?</p>
+      <Grid container direction="row" justify="flex-end" alignItems="center">
+        <Button btnType="Danger" clicked={props.purchaseCancelled}>
+          CANCEL
+        </Button>
+        <Button btnType="Success" clicked={props.purchaseContinued}>
+          CONTINUE
+        </Button>
+      </Grid>
+    </Aux>
+  );
+};
 
 export default OrderSummary;
